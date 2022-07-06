@@ -1,41 +1,39 @@
 import { Request, ResponseToolkit, ResponseObject } from "@hapi/hapi";
-import User from "../models/User";
+import Voucher from "../models/Voucher";
 
-// import { ValidationJoi, Schemas } from "../middlewares/joi";
-
-export const createUser = async (
+export const createVoucher = async (
   request: Request,
   h: ResponseToolkit
 ): Promise<ResponseObject> => {
   try {
-    const user = new User(request.payload);
-    const userSaved = await user.save();
-    return h.response(userSaved);
+    const voucher = new Voucher(request.payload);
+    const voucherSaved = await voucher.save();
+    return h.response(voucherSaved);
   } catch (err) {
     return h.response(err).code(500);
   }
 };
 
-export const getUsers = async (
+export const getVouchers = async (
   request: Request,
   h: ResponseToolkit
 ): Promise<ResponseObject> => {
   try {
-    const users = await User.find();
-    return h.response(users);
+    const vouchers = await Voucher.find();
+    return h.response(vouchers);
   } catch (err) {
     return h.response(err).code(500);
   }
 };
 
-export const getUser = async (
+export const getVoucher = async (
   request: Request,
   h: ResponseToolkit
 ): Promise<ResponseObject> => {
   try {
-    const userfound = await User.findById(request.params.id);
-    if (userfound) {
-      return h.response(userfound);
+    const voucherfound = await Voucher.findById(request.params.id);
+    if (voucherfound) {
+      return h.response(voucherfound);
     }
     return h.response().code(404);
   } catch (err) {
@@ -43,18 +41,18 @@ export const getUser = async (
   }
 };
 
-export const updateUser = async (
+export const updateVoucher = async (
   request: Request,
   h: ResponseToolkit
 ): Promise<ResponseObject> => {
   try {
-    const updatedUser = await User.findByIdAndUpdate(
+    const updatedVoucher = await Voucher.findByIdAndUpdate(
       request.params.id,
       (request.payload as object) || {},
       { new: true }
     );
-    if (updatedUser) {
-      return h.response(updatedUser);
+    if (updatedVoucher) {
+      return h.response(updatedVoucher);
     }
     return h.response().code(404);
   } catch (err) {
@@ -62,14 +60,14 @@ export const updateUser = async (
   }
 };
 
-export const deleteUser = async (
+export const deleteVoucher = async (
   request: Request,
   h: ResponseToolkit
 ): Promise<ResponseObject> => {
   try {
-    const deletedUser = await User.findByIdAndDelete(request.params.id);
-    if (deletedUser) {
-      return h.response(deletedUser);
+    const deletedVoucher = await Voucher.findByIdAndDelete(request.params.id);
+    if (deletedVoucher) {
+      return h.response(deletedVoucher);
     }
     return h.response().code(404);
   } catch (err) {

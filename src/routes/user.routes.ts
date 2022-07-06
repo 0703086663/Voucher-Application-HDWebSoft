@@ -5,37 +5,37 @@ import {
   getUsers,
   getUser,
   updateUser,
-  deleteUser
+  deleteUser,
 } from "../controllers/users.controller";
 
 export const routes = (server: Server) => {
   server.route({
     method: "POST",
     path: "/users",
-    handler: createUser
+    handler: createUser,
   });
 
   server.route({
     method: "GET",
-    path: "/users",
-    handler: getUsers
+    path: "/user",
+    handler: getUsers,
   });
 
   server.route({
     method: "GET",
     path: "/users/{id}",
-    handler: getUser
+    handler: getUser,
   });
 
   server.route({
     method: "PUT",
     path: "/users/{id}",
-    handler: updateUser
+    handler: updateUser,
   });
 
   server.route({
     method: "DELETE",
     path: "/users/{id}",
-    handler: deleteUser
+    handler: deleteUser,
   });
 };

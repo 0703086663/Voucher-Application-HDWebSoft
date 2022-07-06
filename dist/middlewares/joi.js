@@ -39,55 +39,35 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var mongoose_1 = require("mongoose");
-var bcrypt_1 = __importDefault(require("bcrypt"));
-var userSchema = new mongoose_1.Schema({
-    username: {
-        type: String,
-        required: true,
-        lowercase: true,
-    },
-    fullname: {
-        type: String,
-    },
-    password: {
-        type: String,
-        required: true,
-    },
-}, {
-    timestamps: true,
-});
-userSchema.pre("save", function (next) {
-    return __awaiter(this, void 0, void 0, function () {
-        var user, salt, hash;
+exports.Schemas = exports.ValidationJoi = void 0;
+var joi_1 = __importDefault(require("joi"));
+var ValidationJoi = function (schema) {
+    return function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+        var err_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    user = this;
-                    if (!user.isModified("password"))
-                        return [2, next()];
-                    return [4, bcrypt_1.default.genSalt(10)];
+                    _a.trys.push([0, 2, , 3]);
+                    return [4, schema.validateAsync(req.body)];
                 case 1:
-                    salt = _a.sent();
-                    return [4, bcrypt_1.default.hash(user.password, salt)];
-                case 2:
-                    hash = _a.sent();
-                    user.password = hash;
+                    _a.sent();
                     next();
-                    return [2];
+                    return [3, 3];
+                case 2:
+                    err_1 = _a.sent();
+                    console.error(err_1);
+                    return [2, res.status(422).json({ err: err_1 })];
+                case 3: return [2];
             }
         });
-    });
-});
-userSchema.methods.comparePassword = function (password) {
-    return __awaiter(this, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4, bcrypt_1.default.compare(password, this.password)];
-                case 1: return [2, _a.sent()];
-            }
-        });
-    });
+    }); };
 };
-exports.default = (0, mongoose_1.model)("User", userSchema);
-//# sourceMappingURL=User.js.map
+exports.ValidationJoi = ValidationJoi;
+exports.Schemas = {
+    data: joi_1.default.object({
+        username: joi_1.default.string().alphanum().min(3).max(15).required(),
+        fullname: joi_1.default.string(),
+        password: joi_1.default.string().pattern(new RegExp("^[a-zA-Z0-9]{3,30}$")),
+    }),
+};
+//# sourceMappingURL=joi.js.map

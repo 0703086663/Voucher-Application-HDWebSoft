@@ -6,27 +6,27 @@ var routes = function (server) {
     server.route({
         method: "POST",
         path: "/users",
-        handler: users_controller_1.createUser
+        handler: users_controller_1.createUser,
     });
     server.route({
         method: "GET",
-        path: "/users",
-        handler: users_controller_1.getUsers
+        path: "/user",
+        handler: users_controller_1.getUsers,
     });
     server.route({
         method: "GET",
         path: "/users/{id}",
-        handler: users_controller_1.getUser
+        handler: users_controller_1.getUser,
     });
     server.route({
         method: "PUT",
         path: "/users/{id}",
-        handler: users_controller_1.updateUser
+        handler: users_controller_1.updateUser,
     });
     server.route({
         method: "DELETE",
         path: "/users/{id}",
-        handler: users_controller_1.deleteUser
+        handler: users_controller_1.deleteUser,
     });
 };
 exports.routes = routes;

@@ -39,106 +39,106 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteUser = exports.updateUser = exports.getUser = exports.getUsers = exports.createUser = void 0;
-var User_1 = __importDefault(require("../models/User"));
-var createUser = function (request, h) { return __awaiter(void 0, void 0, void 0, function () {
-    var user, userSaved, err_1;
+exports.deleteVoucher = exports.updateVoucher = exports.getVoucher = exports.getVouchers = exports.createVoucher = void 0;
+var Voucher_1 = __importDefault(require("../models/Voucher"));
+var createVoucher = function (request, h) { return __awaiter(void 0, void 0, void 0, function () {
+    var voucher, voucherSaved, err_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                user = new User_1.default(request.payload);
-                return [4, user.save()];
+                voucher = new Voucher_1.default(request.payload);
+                return [4 /*yield*/, voucher.save()];
             case 1:
-                userSaved = _a.sent();
-                return [2, h.response(userSaved)];
+                voucherSaved = _a.sent();
+                return [2 /*return*/, h.response(voucherSaved)];
             case 2:
                 err_1 = _a.sent();
-                return [2, h.response(err_1).code(500)];
-            case 3: return [2];
+                return [2 /*return*/, h.response(err_1).code(500)];
+            case 3: return [2 /*return*/];
         }
     });
 }); };
-exports.createUser = createUser;
-var getUsers = function (request, h) { return __awaiter(void 0, void 0, void 0, function () {
-    var users, err_2;
+exports.createVoucher = createVoucher;
+var getVouchers = function (request, h) { return __awaiter(void 0, void 0, void 0, function () {
+    var vouchers, err_2;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4, User_1.default.find()];
+                return [4 /*yield*/, Voucher_1.default.find()];
             case 1:
-                users = _a.sent();
-                return [2, h.response(users)];
+                vouchers = _a.sent();
+                return [2 /*return*/, h.response(vouchers)];
             case 2:
                 err_2 = _a.sent();
-                return [2, h.response(err_2).code(500)];
-            case 3: return [2];
+                return [2 /*return*/, h.response(err_2).code(500)];
+            case 3: return [2 /*return*/];
         }
     });
 }); };
-exports.getUsers = getUsers;
-var getUser = function (request, h) { return __awaiter(void 0, void 0, void 0, function () {
-    var userfound, err_3;
+exports.getVouchers = getVouchers;
+var getVoucher = function (request, h) { return __awaiter(void 0, void 0, void 0, function () {
+    var voucherfound, err_3;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4, User_1.default.findById(request.params.id)];
+                return [4 /*yield*/, Voucher_1.default.findById(request.params.id)];
             case 1:
-                userfound = _a.sent();
-                if (userfound) {
-                    return [2, h.response(userfound)];
+                voucherfound = _a.sent();
+                if (voucherfound) {
+                    return [2 /*return*/, h.response(voucherfound)];
                 }
-                return [2, h.response().code(404)];
+                return [2 /*return*/, h.response().code(404)];
             case 2:
                 err_3 = _a.sent();
-                return [2, h.response(err_3).code(500)];
-            case 3: return [2];
+                return [2 /*return*/, h.response(err_3).code(500)];
+            case 3: return [2 /*return*/];
         }
     });
 }); };
-exports.getUser = getUser;
-var updateUser = function (request, h) { return __awaiter(void 0, void 0, void 0, function () {
-    var updatedUser, err_4;
+exports.getVoucher = getVoucher;
+var updateVoucher = function (request, h) { return __awaiter(void 0, void 0, void 0, function () {
+    var updatedVoucher, err_4;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4, User_1.default.findByIdAndUpdate(request.params.id, request.payload || {}, { new: true })];
+                return [4 /*yield*/, Voucher_1.default.findByIdAndUpdate(request.params.id, request.payload || {}, { new: true })];
             case 1:
-                updatedUser = _a.sent();
-                if (updatedUser) {
-                    return [2, h.response(updatedUser)];
+                updatedVoucher = _a.sent();
+                if (updatedVoucher) {
+                    return [2 /*return*/, h.response(updatedVoucher)];
                 }
-                return [2, h.response().code(404)];
+                return [2 /*return*/, h.response().code(404)];
             case 2:
                 err_4 = _a.sent();
-                return [2, h.response(err_4).code(500)];
-            case 3: return [2];
+                return [2 /*return*/, h.response(err_4).code(500)];
+            case 3: return [2 /*return*/];
         }
     });
 }); };
-exports.updateUser = updateUser;
-var deleteUser = function (request, h) { return __awaiter(void 0, void 0, void 0, function () {
-    var deletedUser, err_5;
+exports.updateVoucher = updateVoucher;
+var deleteVoucher = function (request, h) { return __awaiter(void 0, void 0, void 0, function () {
+    var deletedVoucher, err_5;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4, User_1.default.findByIdAndDelete(request.params.id)];
+                return [4 /*yield*/, Voucher_1.default.findByIdAndDelete(request.params.id)];
             case 1:
-                deletedUser = _a.sent();
-                if (deletedUser) {
-                    return [2, h.response(deletedUser)];
+                deletedVoucher = _a.sent();
+                if (deletedVoucher) {
+                    return [2 /*return*/, h.response(deletedVoucher)];
                 }
-                return [2, h.response().code(404)];
+                return [2 /*return*/, h.response().code(404)];
             case 2:
                 err_5 = _a.sent();
-                return [2, h.response(err_5).code(500)];
-            case 3: return [2];
+                return [2 /*return*/, h.response(err_5).code(500)];
+            case 3: return [2 /*return*/];
         }
     });
 }); };
-exports.deleteUser = deleteUser;
-//# sourceMappingURL=users.controller.js.map
+exports.deleteVoucher = deleteVoucher;
+//# sourceMappingURL=voucher.controller.js.map

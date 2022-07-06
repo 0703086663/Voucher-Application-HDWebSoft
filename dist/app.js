@@ -1,4 +1,27 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -35,25 +58,37 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.init = void 0;
 var hapi_1 = require("@hapi/hapi");
 var user_routes_1 = require("./routes/user.routes");
+var voucher_routes_1 = require("./routes/voucher.routes");
+var Inert = __importStar(require("@hapi/inert"));
+var Vision = __importStar(require("@hapi/vision"));
+var swagger_1 = __importDefault(require("./plugins/swagger"));
 var init = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var server;
+    var server, plugins;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 server = new hapi_1.Server({
                     port: 3000,
-                    host: "localhost"
+                    host: "localhost",
                 });
                 (0, user_routes_1.routes)(server);
-                return [4 /*yield*/, server.start()];
+                (0, voucher_routes_1.voucherRoutes)(server);
+                plugins = [Inert, Vision, swagger_1.default];
+                return [4, server.register(plugins)];
             case 1:
                 _a.sent();
+                return [4, server.start()];
+            case 2:
+                _a.sent();
                 console.log("Server running on %s", server.info.uri);
-                return [2 /*return*/];
+                return [2];
         }
     });
 }); };
